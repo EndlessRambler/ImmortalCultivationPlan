@@ -31,7 +31,7 @@ public class ImmortalController {
     // todo: page immortal info
     @PostMapping("/getList")
     public ResultResponse getImmortals() {
-        return new ResultResponse();
+        return new ResultResponse("System");
     }
 
 
