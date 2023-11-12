@@ -2,6 +2,7 @@ package org.woofteam.immortalcultivationplan.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.woofteam.immortalcultivationplan.dao.Immortal;
+import org.woofteam.immortalcultivationplan.dao.ResultResponse;
 import org.woofteam.immortalcultivationplan.dto.BasicImmortalRequest;
 import org.woofteam.immortalcultivationplan.dto.ImmortalRequest;
 import org.woofteam.immortalcultivationplan.mapper.ImmortalMapperPlus;
@@ -17,13 +18,17 @@ public class ImmortalServiceImpl implements ImmortalService {
 
 
     @Override
-    public Immortal getImmortalInfo(BasicImmortalRequest basicImmortalRequest) {
-        return immortalMapper.selectOne(new QueryWrapper<Immortal>().select().eq("immortal_id",
+    public ResultResponse getImmortalInfo(BasicImmortalRequest basicImmortalRequest) {
+        //获取用户信息
+        Immortal immortal_info = immortalMapper.selectOne(new QueryWrapper<Immortal>().select().eq("immortal_id",
                 basicImmortalRequest.immortalId));
+
+        return null;
     }
 
     @Override
     public void ImmortalRegister(ImmortalRequest immortalRequest) {
+        // todo: 注册逻辑
         Immortal immortal = new Immortal();
         BeanUtils.copyProperties(immortalRequest, immortal);
         immortalMapper.insert(immortal);

@@ -8,6 +8,8 @@ public class Immortal {
     public String immortalId;
     public String immortalName;
     public String immortalPassword;
-    public String immortalGender;
+    public int immortalGender;
     public String immortalBirthday;
+    public int immortalAttributeHide;
+    public int immortalAttributeContentHidde;
 }

@@ -5,6 +5,9 @@ import lombok.Data;
 @Data
 public class ImmortalAttributeInfo {
     public String immortalID;
+    public String immortalAttributeID;
     public String immortalAttributeName;
-    public String immortalAttributeValue;
+
+    public int immortalAttributeHide;
+
 }

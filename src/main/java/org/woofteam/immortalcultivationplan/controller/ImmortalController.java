@@ -15,9 +15,14 @@ public class ImmortalController {
     @Autowired
     ImmortalService immortalService;
 
+    /**
+     * 获取用户基本信息-属性值以及属性说明
+     * @param basicImmortalRequest
+     * @return
+     */
     @PostMapping("/getInfo")
     public ResultResponse getImmortalInfo(@Validated @RequestBody BasicImmortalRequest basicImmortalRequest){
-        return new ResultResponse(immortalService.getImmortalInfo(basicImmortalRequest));
+        return   immortalService.getImmortalInfo(basicImmortalRequest);
     }
     @PostMapping("/register")
     public ResultResponse ImmortalRegister(@Valid @RequestBody ImmortalRequest immortalRequest) {
