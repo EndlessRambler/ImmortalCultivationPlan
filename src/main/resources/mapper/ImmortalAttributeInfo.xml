@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.woofteam.immortalcultivationplan.mapper.ImmortalAttributeInfoMapper">
+
+    <select id="selectImmortalAttributeInfoById"
+            resultType="org.woofteam.immortalcultivationplan.dao.ImmortalAttributeInfo">
+        select * from immortal_attribute_info where immortal_id = #{immortal_id}
+    </select>
+</mapper>

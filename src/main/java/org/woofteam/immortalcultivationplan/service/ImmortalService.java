@@ -10,5 +10,5 @@ public interface ImmortalService {
 
     ResultResponse getImmortalInfo(BasicImmortalRequest basicImmortalRequest);
 
-    void ImmortalRegister(ImmortalRequest immortalRequest);
+    ResultResponse ImmortalRegister(ImmortalRequest immortalRequest);
 }

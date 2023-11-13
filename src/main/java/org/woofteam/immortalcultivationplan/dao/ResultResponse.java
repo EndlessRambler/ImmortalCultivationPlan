@@ -29,4 +29,12 @@ public class ResultResponse<T> {
         this.message=ExceptionEnum.SUCCESS.getResultMsg();
         this.body = body;
     }
+
+    public static ResultResponse setFailed(ExceptionEnum exceptionEnum){
+       return new ResultResponse<>(exceptionEnum);
+    }
+
+    public static ResultResponse success(){
+        return new ResultResponse<>();
+    }
 }

@@ -7,14 +7,15 @@ package org.woofteam.immortalcultivationplan.dto;
  * @version: v1.0
  */
 public enum ExceptionEnum implements BaseErrorInfoInterface{
-    
+    // todo :错误码定义
     // 数据操作错误定义
     SUCCESS("200", "成功!"),
     BODY_NOT_MATCH("4000","请求的数据格式不符!"),
     SIGNATURE_NOT_MATCH("4001","请求的数字签名不匹配!"),
     NOT_FOUND("404", "未找到该资源!"),
     INTERNAL_SERVER_ERROR("5001", "服务器内部错误!"),
-    SERVER_BUSY("5003","服务器正忙，请稍后再试!");
+    SERVER_BUSY("5003","服务器正忙，请稍后再试!"),
+    USER_DEFINE("5001", "用户已定义");
 
     /**
      * 错误码

@@ -1,6 +1,7 @@
 package org.woofteam.immortalcultivationplan.controller;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 import org.woofteam.immortalcultivationplan.dao.ResultResponse;
 import org.woofteam.immortalcultivationplan.dto.BasicImmortalRequest;
 import org.woofteam.immortalcultivationplan.dto.ImmortalRequest;
@@ -22,8 +23,14 @@ public class ImmortalController {
      */
     @PostMapping("/getInfo")
     public ResultResponse getImmortalInfo(@Validated @RequestBody BasicImmortalRequest basicImmortalRequest){
-        return   immortalService.getImmortalInfo(basicImmortalRequest);
+        return  immortalService.getImmortalInfo(basicImmortalRequest);
     }
+
+    /**
+     *  注册逻辑
+     * @param immortalRequest
+     * @return
+     */
     @PostMapping("/register")
     public ResultResponse ImmortalRegister(@Valid @RequestBody ImmortalRequest immortalRequest) {
         try {
@@ -33,13 +40,21 @@ public class ImmortalController {
         }
         return new ResultResponse();
     }
-    // todo: page immortal info
+    //  todo: page immortal info 暂时不需要
     @PostMapping("/getList")
     public ResultResponse getImmortals() {
         return new ResultResponse("System");
     }
 
 
+    @GetMapping("/getImmortalInfo")
+    public ResultResponse getImmortalInfo(@RequestParam("id") @NotBlank String id){
+        return new ResultResponse<>();
+    }
 
-
+    // todo: 用户模板设置
+    @PostMapping("/set/AttributeInfo")
+    public ResultResponse setAttributeInfoTemplate(@RequestParam("id") @NotBlank String id){
+        return new ResultResponse<>();
+    }
 }

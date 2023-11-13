@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.woofteam.immortalcultivationplan.mapper.ImmortalMapper">
+    <select id="selectImmortalInfoById" resultType="org.woofteam.immortalcultivationplan.dao.Immortal">
+        select * from immortal where immortal_id=#{immortal.immortalId}
+    </select>
+
+    <select id="getImmortalAndAttributeInfo" resultMap="ImmortalAndAttributeInfo">
+        select * from immortal where immortal_id=#{immortal.immortalId}
+    </select>
+
+    <resultMap id="ImmortalAndAttributeInfo" type="org.woofteam.immortalcultivationplan.dao.Immortal">
+        <result property="immortalId" column="immortal_id"></result>
+        <result property="immortalName" column="immortal_name"></result>
+        <result property="immortalAttributeContentHide" column="immortal_attribute_content_hide"></result>
+        <result property="immortalAttributeHide" column="immortal_attribute_hide"></result>
+        <collection property="immortalAttributeInfos" column="immortal_id"
+                     javaType="ArrayList" ofType="org.woofteam.immortalcultivationplan.dao.ImmortalAttributeInfo" select="selectImmortalAttributeInfoById"></collection>
+    </resultMap>
+
+    <select id="selectImmortalAttributeInfoById"
+            resultType="org.woofteam.immortalcultivationplan.dao.ImmortalAttributeInfo">
+        select * from immortal_attribute_info where immortal_id = #{immortal_id}
+    </select>
+</mapper>
