@@ -2,7 +2,8 @@ package org.woofteam.immortalcultivationplan.controller;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
-import org.woofteam.immortalcultivationplan.dao.ResultResponse;
+import org.woofteam.immortalcultivationplan.vo.ResponseResultBody;
+import org.woofteam.immortalcultivationplan.vo.ResultResponse;
 import org.woofteam.immortalcultivationplan.dto.BasicImmortalRequest;
 import org.woofteam.immortalcultivationplan.dto.ImmortalRequest;
 import org.woofteam.immortalcultivationplan.service.ImmortalService;
@@ -53,7 +54,8 @@ public class ImmortalController {
     }
 
     // todo: 用户模板设置
-    @PostMapping("/set/AttributeInfo")
+    @ResponseResultBody
+    @GetMapping("/set/AttributeInfo")
     public ResultResponse setAttributeInfoTemplate(@RequestParam("id") @NotBlank String id){
         return new ResultResponse<>();
     }

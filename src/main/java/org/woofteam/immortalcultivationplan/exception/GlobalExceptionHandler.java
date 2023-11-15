@@ -3,10 +3,8 @@ package org.woofteam.immortalcultivationplan.exception;
 import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.MissingServletRequestParameterException;
-import org.woofteam.immortalcultivationplan.dao.ResultResponse;
+import org.woofteam.immortalcultivationplan.vo.ResultResponse;
 import org.woofteam.immortalcultivationplan.dto.ExceptionEnum;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -16,7 +14,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
-
+    // todo 将非自定义异常统一过滤 自定义异常单独列出
     @ExceptionHandler(value = {MethodArgumentNotValidException.class,
             ConstraintViolationException.class, BindException.class})
     public ResultResponse<String> handleValidatedException(Exception e) {

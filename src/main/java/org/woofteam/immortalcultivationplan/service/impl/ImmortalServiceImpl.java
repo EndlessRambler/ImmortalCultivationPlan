@@ -1,9 +1,7 @@
 package org.woofteam.immortalcultivationplan.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.woofteam.immortalcultivationplan.dao.Immortal;
-import org.woofteam.immortalcultivationplan.dao.ImmortalAttributeInfo;
-import org.woofteam.immortalcultivationplan.dao.ResultResponse;
+import org.woofteam.immortalcultivationplan.vo.ResultResponse;
 import org.woofteam.immortalcultivationplan.dto.BasicImmortalRequest;
 import org.woofteam.immortalcultivationplan.dto.ExceptionEnum;
 import org.woofteam.immortalcultivationplan.dto.ImmortalInfoVo;
