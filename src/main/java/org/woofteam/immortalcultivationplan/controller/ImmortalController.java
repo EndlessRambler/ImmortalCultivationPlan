@@ -2,61 +2,82 @@ package org.woofteam.immortalcultivationplan.controller;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
-import org.woofteam.immortalcultivationplan.vo.ResponseResultBody;
-import org.woofteam.immortalcultivationplan.vo.ResultResponse;
-import org.woofteam.immortalcultivationplan.dto.BasicImmortalRequest;
-import org.woofteam.immortalcultivationplan.dto.ImmortalRequest;
-import org.woofteam.immortalcultivationplan.service.ImmortalService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
+import org.woofteam.immortalcultivationplan.annonation.ResponseResultBody;
+import org.woofteam.immortalcultivationplan.exception.ResultException;
+import org.woofteam.immortalcultivationplan.message.request.BasicImmortalRequest;
+import org.woofteam.immortalcultivationplan.message.request.ImmortalRequest;
+import org.woofteam.immortalcultivationplan.message.response.ImmortalInfoVo;
+import org.woofteam.immortalcultivationplan.service.ImmortalService;
 
 @RestController
 @RequestMapping("/immortal")
 public class ImmortalController {
+
+    final ImmortalService immortalService;
+
     @Autowired
-    ImmortalService immortalService;
+    public ImmortalController(ImmortalService immortalService) {
+        this.immortalService = immortalService;
+    }
 
     /**
      * 获取用户基本信息-属性值以及属性说明
+     *
      * @param basicImmortalRequest
      * @return
      */
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseResultBody
     @PostMapping("/getInfo")
-    public ResultResponse getImmortalInfo(@Validated @RequestBody BasicImmortalRequest basicImmortalRequest){
-        return  immortalService.getImmortalInfo(basicImmortalRequest);
+    public ImmortalInfoVo getImmortalInfo(
+            @Validated @RequestBody BasicImmortalRequest basicImmortalRequest) {
+        return immortalService.getImmortalInfo(basicImmortalRequest);
     }
 
     /**
-     *  注册逻辑
+     * 注册逻辑
+     *
      * @param immortalRequest
      * @return
      */
+    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseResultBody
     @PostMapping("/register")
-    public ResultResponse ImmortalRegister(@Valid @RequestBody ImmortalRequest immortalRequest) {
-        try {
-            immortalService.ImmortalRegister(immortalRequest);
-        } catch (Exception e) {
-            return new ResultResponse("System error","5001" );
-        }
-        return new ResultResponse();
+    public ImmortalInfoVo ImmortalRegister(@Valid @RequestBody ImmortalRequest immortalRequest)
+            throws ResultException {
+        return immortalService.ImmortalRegister(immortalRequest);
     }
+
     //  todo: page immortal info 暂时不需要
-    @PostMapping("/getList")
-    public ResultResponse getImmortals() {
-        return new ResultResponse("System");
+    @GetMapping("/getList")
+    @ResponseResultBody
+    public Object getImmortals() {
+        return null;
     }
 
 
-    @GetMapping("/getImmortalInfo")
-    public ResultResponse getImmortalInfo(@RequestParam("id") @NotBlank String id){
-        return new ResultResponse<>();
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseResultBody
+    @GetMapping("/getImmortalInfo/{id}")
+    public ImmortalInfoVo getImmortalInfo(@NotBlank @PathVariable("id") String id) {
+        return immortalService.getImmortalInfo(id);
     }
 
     // todo: 用户模板设置
+    @ResponseStatus(HttpStatus.OK)
     @ResponseResultBody
-    @GetMapping("/set/AttributeInfo")
-    public ResultResponse setAttributeInfoTemplate(@RequestParam("id") @NotBlank String id){
-        return new ResultResponse<>();
+    @PostMapping("/set/AttributeInfo/{id}")
+    public Object setAttributeInfoTemplate(@NotBlank @PathVariable("id") String id) {
+        return null;
     }
 }

@@ -1,6 +1,5 @@
-package org.woofteam.immortalcultivationplan.dao;
+package org.woofteam.immortalcultivationplan.model;
 
-import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
 /**

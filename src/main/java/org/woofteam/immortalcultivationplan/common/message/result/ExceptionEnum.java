@@ -1,4 +1,4 @@
-package org.woofteam.immortalcultivationplan.dto;
+package org.woofteam.immortalcultivationplan.common.message.result;
 
 /**
  * @description: 异常处理枚举类
@@ -6,7 +6,7 @@ package org.woofteam.immortalcultivationplan.dto;
  * @date: 2021/4/19 21:41
  * @version: v1.0
  */
-public enum ExceptionEnum implements BaseErrorInfoInterface{
+public enum ExceptionEnum implements BaseErrorInfoInterface {
     // todo :错误码定义
     // 数据操作错误定义
     SUCCESS("200", "成功!"),

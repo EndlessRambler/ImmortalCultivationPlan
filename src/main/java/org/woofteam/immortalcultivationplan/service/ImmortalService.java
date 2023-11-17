@@ -1,13 +1,15 @@
 package org.woofteam.immortalcultivationplan.service;
 
-import org.woofteam.immortalcultivationplan.vo.ResultResponse;
-import org.woofteam.immortalcultivationplan.dto.BasicImmortalRequest;
-import org.woofteam.immortalcultivationplan.dto.ImmortalRequest;
+import org.woofteam.immortalcultivationplan.exception.ResultException;
+import org.woofteam.immortalcultivationplan.message.request.BasicImmortalRequest;
+import org.woofteam.immortalcultivationplan.message.request.ImmortalRequest;
+import org.woofteam.immortalcultivationplan.message.response.ImmortalInfoVo;
 
 public interface ImmortalService {
 
+    ImmortalInfoVo getImmortalInfo(String id);
 
-    ResultResponse getImmortalInfo(BasicImmortalRequest basicImmortalRequest);
+    ImmortalInfoVo getImmortalInfo(BasicImmortalRequest basicImmortalRequest);
 
-    ResultResponse ImmortalRegister(ImmortalRequest immortalRequest);
+    ImmortalInfoVo ImmortalRegister(ImmortalRequest immortalRequest) throws ResultException;
 }

@@ -1,6 +1,6 @@
 package org.woofteam.immortalcultivationplan.exception;
 
-import org.woofteam.immortalcultivationplan.dto.BaseErrorInfoInterface;
+import org.woofteam.immortalcultivationplan.common.message.result.BaseErrorInfoInterface;
 
 /**
  * @description: 自定义异常类

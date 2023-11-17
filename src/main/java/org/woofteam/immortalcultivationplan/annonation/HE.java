@@ -1,4 +1,4 @@
-package org.woofteam.immortalcultivationplan.interceptor;
+package org.woofteam.immortalcultivationplan.annonation;
 
 import java.lang.annotation.*;
 

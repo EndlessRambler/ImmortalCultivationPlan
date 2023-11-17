@@ -1,4 +1,4 @@
-package org.woofteam.immortalcultivationplan.vo;
+package org.woofteam.immortalcultivationplan.annonation;
 
 import org.springframework.web.bind.annotation.ResponseBody;
 

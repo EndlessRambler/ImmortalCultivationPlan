@@ -1,12 +1,12 @@
-package org.woofteam.immortalcultivationplan.mapper;
+package org.woofteam.immortalcultivationplan.dao;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.woofteam.immortalcultivationplan.dao.Immortal;
-import org.woofteam.immortalcultivationplan.dto.ImmortalInfoVo;
+import org.woofteam.immortalcultivationplan.model.Immortal;
 
 @Mapper
-public interface ImmortalMapper {
+public interface ImmortalDao extends BaseMapper<Immortal> {
 
     Immortal selectImmortalInfoById(@Param("immortal") Immortal immortal);
     Immortal getImmortalAndAttributeInfo(@Param("immortal") Immortal immortal);

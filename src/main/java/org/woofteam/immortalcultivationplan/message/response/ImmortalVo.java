@@ -1,4 +1,4 @@
-package org.woofteam.immortalcultivationplan.vo;
+package org.woofteam.immortalcultivationplan.message.response;
 
 import lombok.Data;
 

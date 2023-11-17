@@ -1,7 +1,7 @@
-package org.woofteam.immortalcultivationplan.dto;
+package org.woofteam.immortalcultivationplan.message.response;
 
 import lombok.Data;
-import org.woofteam.immortalcultivationplan.dao.ImmortalAttributeInfo;
+import org.woofteam.immortalcultivationplan.model.ImmortalAttributeInfo;
 
 import java.util.List;
 @Data

@@ -1,4 +1,4 @@
-package org.woofteam.immortalcultivationplan.dto;
+package org.woofteam.immortalcultivationplan.common.message.result;
 
 /**
  * @description: 服务接口类

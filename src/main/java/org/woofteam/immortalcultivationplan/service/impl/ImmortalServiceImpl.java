@@ -1,54 +1,65 @@
 package org.woofteam.immortalcultivationplan.service.impl;
 
-import org.woofteam.immortalcultivationplan.dao.Immortal;
-import org.woofteam.immortalcultivationplan.vo.ResultResponse;
-import org.woofteam.immortalcultivationplan.dto.BasicImmortalRequest;
-import org.woofteam.immortalcultivationplan.dto.ExceptionEnum;
-import org.woofteam.immortalcultivationplan.dto.ImmortalInfoVo;
-import org.woofteam.immortalcultivationplan.dto.ImmortalRequest;
-import org.woofteam.immortalcultivationplan.mapper.ImmortalAttributeInfoMapper;
-import org.woofteam.immortalcultivationplan.mapper.ImmortalMapper;
-import org.woofteam.immortalcultivationplan.mapper.ImmortalMapperPlus;
-import org.woofteam.immortalcultivationplan.service.ImmortalService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.woofteam.immortalcultivationplan.common.message.result.ExceptionEnum;
+import org.woofteam.immortalcultivationplan.exception.ResultException;
+import org.woofteam.immortalcultivationplan.dao.ImmortalAttributeInfoDao;
+import org.woofteam.immortalcultivationplan.dao.ImmortalDao;
+import org.woofteam.immortalcultivationplan.message.request.BasicImmortalRequest;
+import org.woofteam.immortalcultivationplan.message.request.ImmortalRequest;
+import org.woofteam.immortalcultivationplan.message.response.ImmortalInfoVo;
+import org.woofteam.immortalcultivationplan.model.Immortal;
+import org.woofteam.immortalcultivationplan.service.ImmortalService;
 
 @Service
 public class ImmortalServiceImpl implements ImmortalService {
-    @Autowired
-    ImmortalMapperPlus immortalMapperPlus;
-    @Autowired
-    ImmortalMapper immortalMapper;
-    @Autowired
-    ImmortalAttributeInfoMapper immortalAttributeInfoMapper;
-    @Override
-    public ResultResponse getImmortalInfo(BasicImmortalRequest basicImmortalRequest) {
 
+    @Autowired
+    ImmortalDao immortalDao;
+    @Autowired
+    ImmortalAttributeInfoDao immortalAttributeInfoDao;
+
+    @Override
+    public ImmortalInfoVo getImmortalInfo(String id) {
         Immortal immortal = new Immortal();
-        BeanUtils.copyProperties(basicImmortalRequest,immortal);
-        // 获取用户基本信息以及属性
-        Immortal immortalAndAttributeInfo = immortalMapper.getImmortalAndAttributeInfo(immortal);
+        immortal.setImmortalId(id);
+
+        Immortal immortalAndAttributeInfo = immortalDao.getImmortalAndAttributeInfo(immortal);
         ImmortalInfoVo immortalInfoVo = new ImmortalInfoVo();
-        BeanUtils.copyProperties(immortalAndAttributeInfo,immortalInfoVo);
-        return new ResultResponse(immortalInfoVo);
+        BeanUtils.copyProperties(immortalAndAttributeInfo, immortalInfoVo);
+        return immortalInfoVo;
     }
 
     @Override
-    public ResultResponse ImmortalRegister(ImmortalRequest immortalRequest) {
+    public ImmortalInfoVo getImmortalInfo(BasicImmortalRequest basicImmortalRequest) {
+
+        Immortal immortal = new Immortal();
+        BeanUtils.copyProperties(basicImmortalRequest, immortal);
+        // 获取用户基本信息以及属性
+        Immortal immortalAndAttributeInfo = immortalDao.getImmortalAndAttributeInfo(immortal);
+        ImmortalInfoVo immortalInfoVo = new ImmortalInfoVo();
+        BeanUtils.copyProperties(immortalAndAttributeInfo, immortalInfoVo);
+        return immortalInfoVo;
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public ImmortalInfoVo ImmortalRegister(ImmortalRequest immortalRequest) throws ResultException {
         // todo: 注册逻辑
         //
-        Immortal immortal = immortalMapperPlus.selectById(Immortal.class);
-        if (immortal!=null){
-            return ResultResponse.setFailed(ExceptionEnum.USER_DEFINE);
+        Immortal immortal = immortalDao.selectById(immortalRequest.getImmortalId());
+        if (immortal != null) {
+            throw new ResultException(ExceptionEnum.USER_DEFINE);
         }
-        immortal= new Immortal();
+        immortal = new Immortal();
         BeanUtils.copyProperties(immortalRequest, immortal);
-        try {
-            immortalMapperPlus.insert(immortal);
-        }catch (Exception e) {
-            // todo 自定义异常类 处理Sql异常
-        }
-        return ResultResponse.success();
+        immortalDao.insert(immortal);
+
+        ImmortalInfoVo immortalInfoVo = new ImmortalInfoVo();
+        BeanUtils.copyProperties(immortal, immortalInfoVo);
+        return immortalInfoVo;
     }
 }
