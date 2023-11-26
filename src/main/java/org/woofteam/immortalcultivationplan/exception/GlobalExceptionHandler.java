@@ -1,5 +1,7 @@
 package org.woofteam.immortalcultivationplan.exception;
 
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.MalformedJwtException;
 import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -42,7 +44,7 @@ public class GlobalExceptionHandler {
 //            errorMsg = errorMsg + ex.getAllErrors().stream().map(ObjectError::getDefaultMessage).collect(Collectors.joining(", "));
         }
         return new ResponseEntity<>(
-                ResultResponse.fail(ExceptionEnum.BODY_NOT_MATCH, e.getMessage()),
+                ResultResponse.fail(ExceptionEnum.BODY_NOT_MATCH,errorMsg),
                 HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
@@ -59,7 +61,7 @@ public class GlobalExceptionHandler {
         log.error("Handler ResultException, msg: {}", e.getMessage());
         return new ResponseEntity<>(
                 ResultResponse.fail(ExceptionEnum.INTERNAL_SERVER_ERROR, e.getMessage()),
-                HttpStatus.INTERNAL_SERVER_ERROR);
+                HttpStatus.INTERNAL_SERVER_ERROR );
     }
 
     @ExceptionHandler(value = {MissingServletRequestParameterException.class})
@@ -70,10 +72,18 @@ public class GlobalExceptionHandler {
                 ResultResponse.fail(ExceptionEnum.INTERNAL_SERVER_ERROR, e.getMessage()),
                 HttpStatus.INTERNAL_SERVER_ERROR);
     }
-
+    @ExceptionHandler(value = {ExpiredJwtException.class, MalformedJwtException.class})
+    public ResponseEntity<Object> expiredJwtException( Exception e){
+        if(!(e instanceof ExpiredJwtException)){
+            log.info("JWT格式错误{}",e.getMessage());
+            return new ResponseEntity<>(ResultResponse.fail(ExceptionEnum.JWT_PARSE),HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        log.info("JWT认证过期。。。。{}",e.getMessage());
+        return new ResponseEntity<>(ResultResponse.fail(ExceptionEnum.JWT_EXPIRE),HttpStatus.INTERNAL_SERVER_ERROR);
+    }
     @ExceptionHandler(value = {Exception.class})
     public ResponseEntity<Object> handleException(Exception e) {
-        log.error("Handler Exception: ", e);
+        log.error("Handler Exception: {}", e.getMessage());
         return new ResponseEntity<>(
                 ResultResponse.fail(ExceptionEnum.INTERNAL_SERVER_ERROR, e.getMessage()),
                 HttpStatus.INTERNAL_SERVER_ERROR);

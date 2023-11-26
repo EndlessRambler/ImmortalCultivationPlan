@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.woofteam.immortalcultivationplan.annonation.ImmortalPrivileges;
 import org.woofteam.immortalcultivationplan.annonation.ResponseResultBody;
+import org.woofteam.immortalcultivationplan.common.message.response.ResultResponse;
 import org.woofteam.immortalcultivationplan.exception.ResultException;
 import org.woofteam.immortalcultivationplan.message.request.BasicImmortalRequest;
 import org.woofteam.immortalcultivationplan.message.request.ImmortalRequest;
@@ -37,7 +39,7 @@ public class ImmortalController {
      * @return
      */
     @ResponseStatus(HttpStatus.OK)
-    @ResponseResultBody
+    @ImmortalPrivileges
     @PostMapping("/getInfo")
     public ImmortalInfoVo getImmortalInfo(
             @Validated @RequestBody BasicImmortalRequest basicImmortalRequest) {
@@ -53,9 +55,10 @@ public class ImmortalController {
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseResultBody
     @PostMapping("/register")
-    public ImmortalInfoVo ImmortalRegister(@Valid @RequestBody ImmortalRequest immortalRequest)
+    public ResultResponse ImmortalRegister(@Valid @RequestBody ImmortalRequest immortalRequest)
             throws ResultException {
-        return immortalService.ImmortalRegister(immortalRequest);
+        immortalService.ImmortalRegister(immortalRequest);
+        return ResultResponse.success();
     }
 
     //  todo: page immortal info 暂时不需要

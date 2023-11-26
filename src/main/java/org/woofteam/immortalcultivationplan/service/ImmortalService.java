@@ -11,5 +11,5 @@ public interface ImmortalService {
 
     ImmortalInfoVo getImmortalInfo(BasicImmortalRequest basicImmortalRequest);
 
-    ImmortalInfoVo ImmortalRegister(ImmortalRequest immortalRequest) throws ResultException;
+    void ImmortalRegister(ImmortalRequest immortalRequest) throws ResultException;
 }

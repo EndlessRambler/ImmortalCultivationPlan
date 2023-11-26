@@ -15,8 +15,11 @@ public enum ExceptionEnum implements BaseErrorInfoInterface {
     NOT_FOUND("404", "未找到该资源!"),
     INTERNAL_SERVER_ERROR("5001", "服务器内部错误!"),
     SERVER_BUSY("5003","服务器正忙，请稍后再试!"),
-    USER_DEFINE("5001", "用户已定义");
-
+    //数据库错误码
+    USER_DEFINE("6001", "用户已定义"),
+    // JWT 响应码
+    JWT_EXPIRE("3001","JWT过期!"),
+    JWT_PARSE("3002","JWT解析错误!");
     /**
      * 错误码
      */

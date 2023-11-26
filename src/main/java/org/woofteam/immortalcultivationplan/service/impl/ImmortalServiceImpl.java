@@ -47,7 +47,7 @@ public class ImmortalServiceImpl implements ImmortalService {
 
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public ImmortalInfoVo ImmortalRegister(ImmortalRequest immortalRequest) throws ResultException {
+    public void ImmortalRegister(ImmortalRequest immortalRequest) throws ResultException {
         // todo: 注册逻辑
         //
         Immortal immortal = immortalDao.selectById(immortalRequest.getImmortalId());
@@ -58,8 +58,5 @@ public class ImmortalServiceImpl implements ImmortalService {
         BeanUtils.copyProperties(immortalRequest, immortal);
         immortalDao.insert(immortal);
 
-        ImmortalInfoVo immortalInfoVo = new ImmortalInfoVo();
-        BeanUtils.copyProperties(immortal, immortalInfoVo);
-        return immortalInfoVo;
     }
 }
