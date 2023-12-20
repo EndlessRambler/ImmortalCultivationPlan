@@ -14,6 +14,8 @@ import org.woofteam.immortalcultivationplan.message.response.ImmortalInfoVo;
 import org.woofteam.immortalcultivationplan.model.Immortal;
 import org.woofteam.immortalcultivationplan.service.ImmortalService;
 
+import java.util.UUID;
+
 @Service
 public class ImmortalServiceImpl implements ImmortalService {
 
@@ -48,15 +50,14 @@ public class ImmortalServiceImpl implements ImmortalService {
     @Transactional(rollbackFor = Exception.class)
     @Override
     public void ImmortalRegister(ImmortalRequest immortalRequest) throws ResultException {
-        // todo: 注册逻辑
-        //
-        Immortal immortal = immortalDao.selectById(immortalRequest.getImmortalId());
-        if (immortal != null) {
+        // todo: 注册逻辑 添加一个唯一身份信息
+        Immortal immortal = new Immortal();
+        BeanUtils.copyProperties(immortalRequest, immortal);
+        immortal.setImmortalId(UUID.randomUUID().toString());
+        try {
+            immortalDao.insert(immortal);
+        } catch (Exception e) {
             throw new ResultException(ExceptionEnum.USER_DEFINE);
         }
-        immortal = new Immortal();
-        BeanUtils.copyProperties(immortalRequest, immortal);
-        immortalDao.insert(immortal);
-
     }
 }

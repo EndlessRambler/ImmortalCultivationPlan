@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.woofteam.immortalcultivationplan.annonation.ImmortalPrivileges;
 import org.woofteam.immortalcultivationplan.annonation.ResponseResultBody;
 import org.woofteam.immortalcultivationplan.common.message.response.ResultResponse;
+import org.woofteam.immortalcultivationplan.common.message.result.ExceptionEnum;
 import org.woofteam.immortalcultivationplan.exception.ResultException;
 import org.woofteam.immortalcultivationplan.message.request.BasicImmortalRequest;
 import org.woofteam.immortalcultivationplan.message.request.ImmortalRequest;

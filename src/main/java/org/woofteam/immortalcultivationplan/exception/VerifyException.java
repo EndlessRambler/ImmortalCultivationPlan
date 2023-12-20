@@ -12,9 +12,6 @@ public class VerifyException extends Exception {
     @Getter
     private final String code;
 
-    public VerifyException(String code) {
-        this(code, null);
-    }
 
     public VerifyException(String code, String message) {
         super(message, null, false, false);

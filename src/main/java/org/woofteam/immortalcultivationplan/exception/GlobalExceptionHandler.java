@@ -31,7 +31,7 @@ public class GlobalExceptionHandler {
             log.error("Handler MethodArgumentNotValidException, msg: {}", e.getMessage());
             errorMsg = errorMsg + ex.getFieldErrors()
                     .stream()
-                    .map(FieldError::getField)
+                    .map(FieldError::getDefaultMessage)
                     .collect(Collectors.joining("," + " "));
         } else if (e instanceof ConstraintViolationException ex) {
             // 直接校验具体参数报错

@@ -3,16 +3,16 @@ package org.woofteam.immortalcultivationplan.message.request;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
+import org.hibernate.validator.constraints.Range;
 import org.woofteam.immortalcultivationplan.common.constant.Constant;
 
-@EqualsAndHashCode(callSuper = true)
+
 @Data
-public class ImmortalRequest extends BasicImmortalRequest {
+public class ImmortalRequest {
     @NotBlank(message = "immortalName 不能为空")
     public String immortalName;
-    @Pattern(regexp = "[男,女]")
-    public String immortalGender;
+    @Range(min=1,max=2,message = "immortalGender 错误")
+    public Integer immortalGender;
 
     public String immortalBirthday;
     @NotBlank(message = "immortalName 不能为空")

@@ -8,6 +8,7 @@ import lombok.Setter;
 import org.woofteam.immortalcultivationplan.common.message.request.GenericRequest;
 import org.woofteam.immortalcultivationplan.common.message.result.ExceptionEnum;
 import org.woofteam.immortalcultivationplan.exception.VerifyException;
+import org.woofteam.immortalcultivationplan.message.validation.custom.TelephoneNumber;
 
 @Builder
 @Getter
@@ -15,14 +16,6 @@ import org.woofteam.immortalcultivationplan.exception.VerifyException;
 @NoArgsConstructor
 @AllArgsConstructor
 public class HelloRequest extends GenericRequest {
-
+    @TelephoneNumber(message = "name can not be blank")
     private String name;
-
-    @Override
-    public void checkParams() throws VerifyException {
-        // TODO: implement a verify util to validate the parameters
-        if (name == null || name.length() == 0) {
-            throw new VerifyException(ExceptionEnum.SIGNATURE_NOT_MATCH, "name can not be blank");
-        }
-    }
 }

@@ -1,5 +1,6 @@
 package org.woofteam.immortalcultivationplan.controller;
 
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,10 +28,9 @@ public class HelloController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @ImmortalPrivileges
-    @PostMapping("")
-    public String hello(@RequestBody HelloRequest request) throws Exception {
-        request.checkParams();
+
+    @PostMapping("/1")
+    public String hello(@Valid @RequestBody HelloRequest request) {
         return "hello " + request.getName();
     }
     @ResponseResultBody

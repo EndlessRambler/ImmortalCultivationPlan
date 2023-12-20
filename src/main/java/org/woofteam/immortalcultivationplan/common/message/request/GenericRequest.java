@@ -17,11 +17,4 @@ public abstract class GenericRequest implements Serializable {
     @Setter
     private String requestId;
 
-    public abstract void checkParams() throws VerifyException;
-
-    @Override
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-    }
-
 }

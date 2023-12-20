@@ -11,7 +11,4 @@ public class BasicImmortalRequest extends GenericRequest {
     @NotBlank(message = "immortalId 不能为空")
     public String immortalId;
 
-    @Override
-    public void checkParams() throws VerifyException {
-    }
 }
