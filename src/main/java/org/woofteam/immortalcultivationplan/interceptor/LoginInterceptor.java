@@ -12,6 +12,7 @@ import org.woofteam.immortalcultivationplan.utils.JWTUtils;
 import java.lang.reflect.Method;
 @Slf4j
 public class LoginInterceptor implements HandlerInterceptor {
+    @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         // 如果不是映射到方法直接通过
         if (!(handler instanceof HandlerMethod)) {
@@ -28,7 +29,7 @@ public class LoginInterceptor implements HandlerInterceptor {
             // 这写你拦截需要干的事儿，比如取缓存，SESSION，权限判断等
             String immortalToken = request.getHeader("immortalToken");
             if (immortalToken ==null){
-                System.out.println("====================================");
+                log.error("immortalToken is null...........");
               return false;
             }
             if (!JWTUtils.isExpire(immortalToken)){
